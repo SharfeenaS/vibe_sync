@@ -38,47 +38,58 @@
 
             <form class="upload-box">
 
-                <label class="upload-area">
+    <label class="upload-area">
 
-                    <input
-                        type="file"
-                        id="imageInput"
-                        accept="image/*"
-                        hidden
-                    >
+        <input
+            type="file"
+            id="imageInput"
+            accept="image/*"
+            hidden
+        >
 
-                    <div class="upload-content">
+        <div class="upload-content">
 
-                        <h3>📸 Upload Image</h3>
+            <h3>📸 Upload Image</h3>
 
-                        <p>
-                            Drag & Drop or Click to Browse
-                        </p>
+            <p>
+                Drag & Drop or Click to Browse
+            </p>
 
-                    </div>
+        </div>
 
-                </label>
+    </label>
 
-                <select id="language">
+    <p class="privacy-note">
+        🔒 Your image is <strong>never stored</strong>. It is securely
+        forwarded to the AI only for analysis and is not saved on our
+        servers.
+    </p>
 
-                    <option selected disabled>
-                        Select Language
-                    </option>
+    <select id="language">
 
-                    <option>Malayalam</option>
-                    <option>English</option>
-                    <option>Hindi</option>
-                    <option>Tamil</option>
-                    <option>Telugu</option>
+        <option selected disabled>Select Language</option>
 
-                </select>
+        <option>Malayalam</option>
+        <option>English</option>
+        <option>Hindi</option>
+        <option>Tamil</option>
+        <option>Telugu</option>
+        <option>Kannada</option>
+        <option>Korean</option>
+        <option>Japanese</option>
+        <option>Spanish</option>
 
-                <button type="submit">
-                    Analyze Vibe
-                </button>
+    </select>
 
-            </form>
+    <button type="submit">
+        Analyze Vibe
+    </button>
 
+</form>
+
+<div class="creator">
+    Crafted with ☕ & AI by <span>Sharfeena</span>
+</div>
         </div>
 
     </main>
