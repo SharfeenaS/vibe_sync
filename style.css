@@ -217,7 +217,7 @@ select{
 
 /* ---------- Button ---------- */
 
-button{
+#analyzeBtn{
 
     width:100%;
 
@@ -240,6 +240,30 @@ button{
     cursor:pointer;
 
     transition:.3s;
+
+}
+
+#analyzeBtn:hover{
+
+    background:#5E3023;
+
+    transform:translateY(-3px);
+
+}
+
+#analyzeBtn:disabled{
+
+    opacity:.55;
+
+    cursor:not-allowed;
+
+}
+
+#analyzeBtn:disabled:hover{
+
+    background:#445D48;
+
+    transform:none;
 
 }
 
@@ -417,5 +441,91 @@ button:disabled:hover{
 
     transform:none;
     background:#445D48;
+
+}
+/* ---------- Language Chips ---------- */
+
+.language-section{
+
+    margin-top:28px;
+
+}
+
+.language-section h3{
+
+    margin-bottom:18px;
+
+    color:#445D48;
+
+    font-size:1rem;
+
+    font-weight:600;
+
+}
+
+.language-container{
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    gap: 14px;
+
+    margin-top: 15px;
+
+}
+
+.language-chip{
+
+    width: auto;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 auto;
+
+    background: white;
+
+    border: none;
+
+    padding: 12px 20px;
+
+    border-radius: 999px;
+
+    cursor: pointer;
+
+    color: #445D48;
+
+    font-size: .95rem;
+
+    font-weight: 500;
+
+    transition: .3s ease;
+
+    box-shadow: 0 6px 15px rgba(0,0,0,.08);
+
+    margin: 0;
+
+}
+
+.language-chip:hover{
+
+    transform:translateY(-2px);
+
+    background:#D6CC99;
+
+}
+
+.language-chip.active{
+
+    background:#445D48;
+
+    color:white;
+
+    transform:scale(1.05);
 
 }

@@ -4,7 +4,24 @@ const uploadTitle = document.getElementById("uploadTitle");
 const uploadText = document.getElementById("uploadText");
 const analyzeBtn = document.getElementById("analyzeBtn");
 const form = document.querySelector(".upload-box");
+const languageChips = document.querySelectorAll(".language-chip");
 
+let selectedLanguages = [];
+
+languageChips.forEach(chip => {
+
+    chip.addEventListener("click", () => {
+
+        chip.classList.toggle("active");
+
+        selectedLanguages = [...document.querySelectorAll(".language-chip.active")]
+            .map(chip => chip.textContent.trim());
+
+        console.log(selectedLanguages);
+
+    });
+
+});
 imageInput.addEventListener("change", () => {
 
     const file = imageInput.files[0];
@@ -31,7 +48,13 @@ form.addEventListener("submit", async (e) => {
         alert("Please upload an image.");
         return;
     }
+if(selectedLanguages.length === 0){
 
+    alert("Please select at least one language.");
+
+    return;
+
+}
     analyzeBtn.textContent = "Analyzing...";
     analyzeBtn.disabled = true;
 
