@@ -377,6 +377,41 @@ button:disabled{
     cursor:not-allowed;
 
 }
+.result-card{
+
+    margin-top:40px;
+
+    background:rgba(255,255,255,.35);
+
+    backdrop-filter:blur(20px);
+
+    border-radius:20px;
+
+    padding:25px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+    text-align:left;
+
+    display:none;
+
+}
+
+.result-card h2{
+
+    color:#445D48;
+
+    margin-bottom:15px;
+
+}
+
+.result-card p{
+
+    color:#5E3023;
+
+    line-height:1.7;
+
+}
 
 button:disabled:hover{
 
