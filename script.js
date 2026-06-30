@@ -47,7 +47,17 @@ form.addEventListener("submit", async (e) => {
 
         const data = await response.json();
 
-        alert(JSON.stringify(data, null, 2));
+        const result = document.getElementById("result");
+
+result.style.display = "block";
+
+result.innerHTML = `
+<h2>Backend Response</h2>
+
+<p><strong>Filename:</strong> ${data.filename}</p>
+<p><strong>Type:</strong> ${data.content_type}</p>
+<p>${data.message}</p>
+`;
 
     } catch (error) {
 
