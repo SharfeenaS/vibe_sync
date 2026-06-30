@@ -69,17 +69,30 @@ if(selectedLanguages.length === 0){
         });
 
         const data = await response.json();
+        console.log(data);
 
         const result = document.getElementById("result");
 
 result.style.display = "block";
 
 result.innerHTML = `
-<h2>Backend Response</h2>
+<h2>✨ AI Vibe Analysis</h2>
 
-<p><strong>Filename:</strong> ${data.filename}</p>
-<p><strong>Type:</strong> ${data.content_type}</p>
-<p>${data.message}</p>
+<p><strong>🎭 Mood:</strong> ${data.mood}</p>
+
+<p><strong>🎨 Aesthetic:</strong> ${data.aesthetic}</p>
+
+<p><strong>💡 Lighting:</strong> ${data.lighting}</p>
+
+<p><strong>📍 Scene:</strong> ${data.scene}</p>
+
+<p><strong>🌈 Colors:</strong> ${data.dominant_colors.join(", ")}</p>
+
+<p><strong>❤️ Emotions:</strong> ${data.emotions.join(", ")}</p>
+
+<p><strong>🏷️ Keywords:</strong> ${data.keywords.join(", ")}</p>
+
+<p><strong>🎯 Confidence:</strong> ${data.confidence}%</p>
 `;
 
     } catch (error) {
