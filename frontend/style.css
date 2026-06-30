@@ -1,0 +1,282 @@
+/* ---------- Google Font ---------- */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+
+    background:#FDE5D4;
+    color:#001524;
+    min-height:100vh;
+    overflow-x:hidden;
+    position:relative;
+
+}
+
+/* ---------- Background Blur ---------- */
+
+body::before{
+
+    content:"";
+    position:absolute;
+    width:350px;
+    height:350px;
+
+    background:#D6CC99;
+    filter:blur(140px);
+
+    top:-120px;
+    left:-100px;
+
+    z-index:-2;
+
+}
+
+body::after{
+
+    content:"";
+    position:absolute;
+
+    width:300px;
+    height:300px;
+
+    background:#445D48;
+    opacity:.25;
+
+    filter:blur(120px);
+
+    bottom:-80px;
+    right:-80px;
+
+    z-index:-2;
+
+}
+
+/* ---------- Navbar ---------- */
+
+nav{
+
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:28px 8%;
+
+}
+
+nav h2{
+
+    font-size:2rem;
+    font-weight:700;
+    color:#445D48;
+    letter-spacing:1px;
+
+}
+
+/* ---------- Hero ---------- */
+
+.hero{
+
+    width:100%;
+    min-height:85vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:30px;
+
+}
+
+.hero-content{
+
+    width:100%;
+    max-width:650px;
+
+    text-align:center;
+
+}
+
+/* ---------- Heading ---------- */
+
+.hero h1{
+
+    font-size:3.3rem;
+    line-height:1.2;
+    font-weight:700;
+
+    margin-bottom:20px;
+
+}
+
+.hero p{
+
+    color:#5E3023;
+
+    font-size:1.05rem;
+
+    line-height:1.8;
+
+    margin-bottom:45px;
+
+}
+
+/* ---------- Upload Card ---------- */
+
+.upload-box{
+
+    background:rgba(255,255,255,.35);
+
+    backdrop-filter:blur(20px);
+
+    border:1px solid rgba(255,255,255,.5);
+
+    border-radius:24px;
+
+    padding:35px;
+
+    box-shadow:
+
+        0 20px 40px rgba(0,0,0,.08);
+
+}
+
+/* ---------- Upload Area ---------- */
+
+.upload-area{
+
+    border:2px dashed #445D48;
+
+    border-radius:18px;
+
+    padding:45px;
+
+    display:block;
+
+    cursor:pointer;
+
+    transition:.35s;
+
+}
+
+.upload-area:hover{
+
+    background:#D6CC99;
+
+    transform:translateY(-4px);
+
+}
+
+.upload-content h3{
+
+    font-size:1.4rem;
+
+    color:#445D48;
+
+    margin-bottom:10px;
+
+}
+
+.upload-content p{
+
+    margin:0;
+    color:#5E3023;
+
+}
+
+/* ---------- Select ---------- */
+
+select{
+
+    width:100%;
+
+    margin-top:25px;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:14px;
+
+    outline:none;
+
+    font-size:1rem;
+
+    background:white;
+
+    color:#001524;
+
+    cursor:pointer;
+
+}
+
+/* ---------- Button ---------- */
+
+button{
+
+    width:100%;
+
+    margin-top:20px;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:#445D48;
+
+    color:white;
+
+    font-size:1rem;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+button:hover{
+
+    background:#5E3023;
+
+    transform:translateY(-3px);
+
+}
+
+/* ---------- Responsive ---------- */
+
+@media(max-width:768px){
+
+.hero h1{
+
+    font-size:2.4rem;
+
+}
+
+.hero p{
+
+    font-size:.95rem;
+
+}
+
+.upload-box{
+
+    padding:25px;
+
+}
+
+.upload-area{
+
+    padding:35px;
+
+}
+
+}
