@@ -354,3 +354,33 @@ button:hover{
     transform:scaleX(1);
 
 }
+#preview{
+
+    display:none;
+
+    width:180px;
+    max-height:220px;
+
+    object-fit:cover;
+
+    border-radius:16px;
+
+    margin:0 auto 20px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+
+}
+
+button:disabled{
+
+    opacity:.55;
+    cursor:not-allowed;
+
+}
+
+button:disabled:hover{
+
+    transform:none;
+    background:#445D48;
+
+}
