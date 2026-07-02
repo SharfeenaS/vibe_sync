@@ -5,10 +5,14 @@ const uploadText = document.getElementById("uploadText");
 const analyzeBtn = document.getElementById("analyzeBtn");
 const form = document.querySelector(".upload-box");
 const languageChips = document.querySelectorAll(".language-chip");
+const result = document.getElementById("result");
 
 let selectedLanguages = [];
 
+// -------------------------
 // Language Selection
+// -------------------------
+
 languageChips.forEach(chip => {
 
     chip.addEventListener("click", () => {
@@ -24,7 +28,10 @@ languageChips.forEach(chip => {
 
 });
 
+// -------------------------
 // Image Preview
+// -------------------------
+
 imageInput.addEventListener("change", () => {
 
     const file = imageInput.files[0];
@@ -41,7 +48,10 @@ imageInput.addEventListener("change", () => {
 
 });
 
+// -------------------------
 // Analyze
+// -------------------------
+
 form.addEventListener("submit", async (e) => {
 
     e.preventDefault();
@@ -58,88 +68,98 @@ form.addEventListener("submit", async (e) => {
         return;
     }
 
-    analyzeBtn.textContent = "Analyzing...";
     analyzeBtn.disabled = true;
+    analyzeBtn.textContent = "Analyzing...";
 
     const formData = new FormData();
 
     formData.append("image", file);
-
-// Send selected languages
     formData.append("languages", JSON.stringify(selectedLanguages));
-
 
     try {
 
-        const response = await fetch("https://vibe-sync-qa2g.onrender.com//analyze", {
-            method: "POST",
-            body: formData
-        });
+        const response = await fetch(
+            "https://vibe-sync-qa2g.onrender.com/analyze",
+            {
+                method: "POST",
+                body: formData
+            }
+        );
+
+        if (!response.ok) {
+
+            const errorText = await response.text();
+            console.error(errorText);
+
+            throw new Error(errorText);
+
+        }
 
         const data = await response.json();
 
         console.log(data);
 
-        const result = document.getElementById("result");
-
         let html = `
+            <h2>✨ AI Vibe Analysis</h2>
 
-        <h2>✨ AI Vibe Analysis</h2>
+            <p><strong>🎭 Mood:</strong> ${data.analysis.mood}</p>
+            <p><strong>🎨 Aesthetic:</strong> ${data.analysis.aesthetic}</p>
+            <p><strong>💡 Lighting:</strong> ${data.analysis.lighting}</p>
+            <p><strong>📍 Scene:</strong> ${data.analysis.scene}</p>
+            <p><strong>🌈 Colors:</strong> ${data.analysis.dominant_colors.join(", ")}</p>
+            <p><strong>❤️ Emotions:</strong> ${data.analysis.emotions.join(", ")}</p>
+            <p><strong>🏷️ Keywords:</strong> ${data.analysis.keywords.join(", ")}</p>
+            <p><strong>🎯 Confidence:</strong> ${data.analysis.confidence}%</p>
 
-        <p><strong>🎭 Mood:</strong> ${data.analysis.mood}</p>
+            <hr>
 
-        <p><strong>🎨 Aesthetic:</strong> ${data.analysis.aesthetic}</p>
-
-        <p><strong>💡 Lighting:</strong> ${data.analysis.lighting}</p>
-
-        <p><strong>📍 Scene:</strong> ${data.analysis.scene}</p>
-
-        <p><strong>🌈 Colors:</strong> ${data.analysis.dominant_colors.join(", ")}</p>
-
-        <p><strong>❤️ Emotions:</strong> ${data.analysis.emotions.join(", ")}</p>
-
-        <p><strong>🏷️ Keywords:</strong> ${data.analysis.keywords.join(", ")}</p>
-
-        <p><strong>🎯 Confidence:</strong> ${data.analysis.confidence}%</p>
-
-        <hr>
-
-        <h2>🎵 Recommended Songs</h2>
-
+            <h2>🎵 Recommended Songs</h2>
         `;
 
-        data.recommendations.forEach(song => {
+        if (data.recommendations.length === 0) {
 
-            html += `
+            html += "<p>No songs found.</p>";
 
-            <div class="song-card">
+        } else {
 
-                <h3>${song.title}</h3>
+            data.recommendations.forEach(song => {
 
-                <p><strong>Artist:</strong> ${song.artist}</p>
+                html += `
+                    <div class="song-card">
 
-                <p><strong>⭐ Score:</strong> ${song.score}</p>
+                        <h3>${song.title}</h3>
 
-                <p><strong>🔥 Popularity:</strong> ${song.popularity}</p>
+                        <p><strong>Artist:</strong> ${song.artist}</p>
 
-            </div>
+                        <p><strong>Score:</strong> ${song.score}</p>
 
-            `;
+                        <p><strong>Popularity:</strong> ${song.popularity}</p>
 
-        });
+                    </div>
+                `;
+
+            });
+
+        }
 
         result.innerHTML = html;
         result.style.display = "block";
 
     }
+
     catch (error) {
 
         console.error(error);
-        alert("Backend connection failed!");
+
+        alert("Error: " + error.message);
 
     }
 
-    analyzeBtn.textContent = "Analyze Vibe";
-    analyzeBtn.disabled = false;
+    finally {
+
+        analyzeBtn.disabled = false;
+        analyzeBtn.textContent = "Analyze Vibe";
+
+    }
 
 });
