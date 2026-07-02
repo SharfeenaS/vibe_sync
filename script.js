@@ -71,7 +71,7 @@ form.addEventListener("submit", async (e) => {
 
     try {
 
-        const response = await fetch("https://vibesync-backend.onrender.com/analyze", {
+        const response = await fetch("https://vibe-sync-qa2g.onrender.com//analyze", {
             method: "POST",
             body: formData
         });
