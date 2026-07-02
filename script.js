@@ -8,6 +8,7 @@ const languageChips = document.querySelectorAll(".language-chip");
 
 let selectedLanguages = [];
 
+// Language Selection
 languageChips.forEach(chip => {
 
     chip.addEventListener("click", () => {
@@ -22,6 +23,8 @@ languageChips.forEach(chip => {
     });
 
 });
+
+// Image Preview
 imageInput.addEventListener("change", () => {
 
     const file = imageInput.files[0];
@@ -38,6 +41,7 @@ imageInput.addEventListener("change", () => {
 
 });
 
+// Analyze
 form.addEventListener("submit", async (e) => {
 
     e.preventDefault();
@@ -48,18 +52,22 @@ form.addEventListener("submit", async (e) => {
         alert("Please upload an image.");
         return;
     }
-if(selectedLanguages.length === 0){
 
-    alert("Please select at least one language.");
+    if (selectedLanguages.length === 0) {
+        alert("Please select at least one language.");
+        return;
+    }
 
-    return;
-
-}
     analyzeBtn.textContent = "Analyzing...";
     analyzeBtn.disabled = true;
 
     const formData = new FormData();
+
     formData.append("image", file);
+
+// Send selected languages
+    formData.append("languages", JSON.stringify(selectedLanguages));
+
 
     try {
 
@@ -69,36 +77,65 @@ if(selectedLanguages.length === 0){
         });
 
         const data = await response.json();
+
         console.log(data);
 
         const result = document.getElementById("result");
 
-result.style.display = "block";
+        let html = `
 
-result.innerHTML = `
-<h2>✨ AI Vibe Analysis</h2>
+        <h2>✨ AI Vibe Analysis</h2>
 
-<p><strong>🎭 Mood:</strong> ${data.mood}</p>
+        <p><strong>🎭 Mood:</strong> ${data.analysis.mood}</p>
 
-<p><strong>🎨 Aesthetic:</strong> ${data.aesthetic}</p>
+        <p><strong>🎨 Aesthetic:</strong> ${data.analysis.aesthetic}</p>
 
-<p><strong>💡 Lighting:</strong> ${data.lighting}</p>
+        <p><strong>💡 Lighting:</strong> ${data.analysis.lighting}</p>
 
-<p><strong>📍 Scene:</strong> ${data.scene}</p>
+        <p><strong>📍 Scene:</strong> ${data.analysis.scene}</p>
 
-<p><strong>🌈 Colors:</strong> ${data.dominant_colors.join(", ")}</p>
+        <p><strong>🌈 Colors:</strong> ${data.analysis.dominant_colors.join(", ")}</p>
 
-<p><strong>❤️ Emotions:</strong> ${data.emotions.join(", ")}</p>
+        <p><strong>❤️ Emotions:</strong> ${data.analysis.emotions.join(", ")}</p>
 
-<p><strong>🏷️ Keywords:</strong> ${data.keywords.join(", ")}</p>
+        <p><strong>🏷️ Keywords:</strong> ${data.analysis.keywords.join(", ")}</p>
 
-<p><strong>🎯 Confidence:</strong> ${data.confidence}%</p>
-`;
+        <p><strong>🎯 Confidence:</strong> ${data.analysis.confidence}%</p>
 
-    } catch (error) {
+        <hr>
 
-        alert("Backend connection failed!");
+        <h2>🎵 Recommended Songs</h2>
+
+        `;
+
+        data.recommendations.forEach(song => {
+
+            html += `
+
+            <div class="song-card">
+
+                <h3>${song.title}</h3>
+
+                <p><strong>Artist:</strong> ${song.artist}</p>
+
+                <p><strong>⭐ Score:</strong> ${song.score}</p>
+
+                <p><strong>🔥 Popularity:</strong> ${song.popularity}</p>
+
+            </div>
+
+            `;
+
+        });
+
+        result.innerHTML = html;
+        result.style.display = "block";
+
+    }
+    catch (error) {
+
         console.error(error);
+        alert("Backend connection failed!");
 
     }
 
